@@ -3,9 +3,6 @@ module.exports = {
   outputDir: '../../api/ogc/static/landingpage/',
   assetsDir: './',
   configureWebpack: {
-    output: {
-      hashFunction: 'xxhash64',
-    },
     devtool: "source-map",
     optimization: {
       splitChunks: {
