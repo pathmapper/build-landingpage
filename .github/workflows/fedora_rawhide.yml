@@ -23,8 +23,12 @@ jobs:
       - name: Update system
         run: dnf -y update
         
-      - name: Install yarn
-        run: dnf -y install yarnpkg
+      - run: curl -fsSL https://rpm.nodesource.com/setup_17.x | sudo bash -
+      
+      - run: dnf install -y nodejs
+      
+      - run: corepack enable
     
       - run: yarn install --frozen-lockfile
+      
       - run: yarn build
