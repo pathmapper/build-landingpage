@@ -23,8 +23,14 @@ jobs:
       - name: Update system
         run: dnf -y update
         
-      - name: Install yarn
-        run: dnf -y install yarnpkg
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '17'
+      
+      - run: node -v
+      
+      - run: corepack enable
     
       - run: yarn install --frozen-lockfile
+      
       - run: yarn build
