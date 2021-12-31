@@ -23,9 +23,11 @@ jobs:
       - name: Update system
         run: dnf -y update
         
-      - run: curl -sL https://rpm.nodesource.com/setup_17.x | sudo bash -
+      - run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
       
-      - run: dnf -y install gcc-c++ make nodejs
+      - name: Install node 17
+        shell: bash -l {0}
+        run: nvm install 17
       
       - run: node -v
       
