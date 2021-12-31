@@ -22,15 +22,9 @@ jobs:
 
       - name: Update system
         run: dnf -y update
-
-      - run: node -v
-
-      - name: Install nodejs
-        run: dnf -y install nodejs
-
+        
       - name: Install yarn
         run: dnf -y install yarnpkg
-
+    
       - run: yarn install --frozen-lockfile
-
       - run: yarn build
