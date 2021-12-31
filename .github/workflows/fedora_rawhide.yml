@@ -27,4 +27,7 @@ jobs:
         run: dnf -y install yarnpkg
     
       - run: yarn install --frozen-lockfile
+      
+      - run: find ./node_modules/babel-loader -type f -exec sed -i 's|md4|sha256|g' {} \;
+      
       - run: yarn build
