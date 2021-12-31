@@ -25,11 +25,12 @@ jobs:
         
       - name: Install nvm
         shell: bash -l {0}
-        run: |
-          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
-          export NVM_DIR="$HOME/.nvm"
-          echo "source $NVM_DIR/nvm.sh --install" >> "$HOME/.bash_profile"
-          $NVM_DIR/nvm.sh install 17
+        run: curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+        
+      - name: Install node 17
+        shell: bash -l {0}
+        run: nvm install 17
+
       
       - run: node -v
       
