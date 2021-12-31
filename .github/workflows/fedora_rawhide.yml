@@ -1,0 +1,36 @@
+name: Fedora Rawhide
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: fedora:rawhide
+      options: --security-opt seccomp=unconfined
+      volumes:
+        - ${{ github.workspace }}:/w
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Update system
+        run: dnf -y update
+
+      - run: node -v
+
+      - name: Install nodejs
+        run: dnf -y install nodejs
+
+      - name: Install yarn
+        run: dnf -y install yarnpkg
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn build

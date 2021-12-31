@@ -1,0 +1,36 @@
+name: Fedora 35
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    container:
+      image: fedora:35
+      options: --security-opt seccomp=unconfined
+      volumes:
+        - ${{ github.workspace }}:/w
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Update system
+        run: dnf -y update
+
+      - name: Install nodejs
+        run: dnf -y install nodejs
+
+      - run: node -v
+
+      - name: Install yarn
+        run: dnf -y install yarnpkg
+
+      - run: yarn install --frozen-lockfile
+
+      - run: yarn build
